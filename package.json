@@ -9,7 +9,15 @@
     "test": "next test",
     "lint": "next lint",
     "fix:lint": "eslint . --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "husky pre-commit",
+    "commit-msg": "commitlint --edit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint --edit"
+    }
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -24,6 +32,8 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
