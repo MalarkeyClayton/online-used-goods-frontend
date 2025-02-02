@@ -6,7 +6,6 @@ import TopNavbar from "@/components/layout/Navbar/TopNavbar";
 import Footer from "@/components/layout/Footer";
 import HolyLoader from "holy-loader";
 import Providers from "./providers";
-import Sign from "./sign/page";
 
 export const metadata: Metadata = {
   title: "Shopco",
@@ -17,8 +16,6 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-const token = {};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,11 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={satoshi.className}>
-        {token &&
-          token ? (
-          <Sign />
-        ) : (
-          <>
             <HolyLoader color="#868686" />
             <TopBanner />
             <Providers>
@@ -39,9 +31,6 @@ export default function RootLayout({
               {children}
             </Providers>
             <Footer />
-          </>
-        )
-        }
       </body>
     </html>
   );
