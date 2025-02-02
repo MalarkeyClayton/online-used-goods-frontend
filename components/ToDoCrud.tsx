@@ -25,7 +25,7 @@ const TodoCrud = () => {
 
   const addTodo = async () => {
     try {
-      await todoApi.createTodo({ title });
+      await todoApi.createTodo({ title,  });
       setTitle("");
       setChangeFlag(!changeFlag);
     } catch (error) {

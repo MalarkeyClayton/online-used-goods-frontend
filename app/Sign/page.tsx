@@ -9,17 +9,11 @@ export default function Sign() {
         event.preventDefault();
         const signin = document.querySelector('.signin') as HTMLElement | null;
         const signup = document.querySelector('.signup') as HTMLElement | null;
-        console.log(signin, "++++++",signup);
-        
 
         if (num === 0) {
-            console.log("====");
-            
             if (signin) signin.style.display = 'block';
             if (signup) signup.style.display = 'none';
         }
-        console.log(signin, "change",signup);
-
         if (num === 1) {
             if (signin) signin.style.display = 'none';
             if (signup) signup.style.display = 'block';
