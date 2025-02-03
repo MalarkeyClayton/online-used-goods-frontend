@@ -16,24 +16,16 @@ const data: Product[] = [
   ...relatedProductData,
 ];
 
+export default async function ProductPage({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
 
-export function getProductById(id: number): Product | null {
-  return   data.find((product) => product.id === id) || null;
-}
-export default async function ProductPage({
-  params: _params
-}: {
-  params: { slug: string[] };
-}) {
-  const params = await Promise.resolve(_params);
-
-  if (!params ||!params?.slug || params.slug.length === 0) return notFound();
-  const productId = Number(params.slug[0]);
+  if (!slug) return notFound();
+  const productId = Number(slug[0]);
 
   if (isNaN(productId)) {
     return notFound();
   }
-  const productData = getProductById(productId);
+  const productData : Product | null = data.find((product) => product.id === productId) || null;
 
   if (!productData?.title) {
     notFound();
