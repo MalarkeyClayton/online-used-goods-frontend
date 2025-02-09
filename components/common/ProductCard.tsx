@@ -9,6 +9,7 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ data }: ProductCardProps) => {
+  
   return (
     <Link
       href={`/shop/product/${data.id}/${data.title.split(" ").join("-")}`}
@@ -16,7 +17,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
     >
       <div className="bg-[#F0EEED] rounded-[13px] lg:rounded-[20px] w-full lg:max-w-[295px] aspect-square mb-2.5 xl:mb-4 overflow-hidden">
         <Image
-          src={data.srcUrl}
+          src={`http://localhost:8001${data.banner}`}
           width={295}
           height={298}
           className="rounded-md w-full h-full object-contain hover:scale-110 transition-all duration-500"
