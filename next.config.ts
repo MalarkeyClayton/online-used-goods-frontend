@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['localhost'], // Add localhost to the list of allowed domains
+    domains: ['online-used-goods-backend-443a6c7bad52.herokuapp.com'], // Add localhost to the list of allowed domains
   },
   /* config options here */
 };
