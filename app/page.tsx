@@ -89,7 +89,6 @@ return (
       <div className="mb-[50px] sm:mb-20">
         <DressStyle />
       </div>
-      {/* <Reviews data={reviewsData} /> */}
     </main>
   </>
 );

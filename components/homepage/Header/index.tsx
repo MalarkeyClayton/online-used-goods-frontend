@@ -1,13 +1,20 @@
+'use client'
+
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import * as motion from "framer-motion/client";
+import Chatbot from "@/components/chatgpt/chatgpt";
 
 const Header = () => {
+  const [isGPTOpen, setIsGPTOpen] = useState(false);
+  const handleClick = () => {
+    setIsGPTOpen(!isGPTOpen);
+  }
   return (
     <header className="bg-[#F2F0F1] pt-10 md:pt-24 overflow-hidden">
       <div className="md:max-w-frame mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
@@ -113,7 +120,11 @@ const Header = () => {
             className="absolute left-7 md:left-0 top-36 sm:top-64 md:top-44 lg:top-56 max-w-11 max-h-11 md:max-w-14 md:max-h-14 animate-[spin_3s_infinite]"
           />
         </motion.section>
+        <button className="fixed w-20 h-20 rounded-full bottom-10 right-0 z-30" onClick={handleClick}>
+          <Image src="/images/chatbot.png" width={100} height={100} alt="chatbot" />
+        </button>
       </div>
+      {isGPTOpen && <Chatbot />}
     </header>
   );
 };
