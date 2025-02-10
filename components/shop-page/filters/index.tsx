@@ -5,12 +5,14 @@ import DressStyleSection from "@/components/shop-page/filters/DressStyleSection"
 import PriceSection from "@/components/shop-page/filters/PriceSection";
 import SizeSection from "@/components/shop-page/filters/SizeSection";
 import { Button } from "@/components/ui/button";
+import { Category } from "@/types/category.types";
 
-const Filters = () => {
+const Filters =  ({data}:{data: Category[]}) => {
+
   return (
     <>
       <hr className="border-t-black/10" />
-      <CategoriesSection />
+      <CategoriesSection data={data}/>
       <hr className="border-t-black/10" />
       <PriceSection />
       <hr className="border-t-black/10" />
