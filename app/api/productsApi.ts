@@ -1,4 +1,4 @@
-// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "localhost:8001";
+
 import axios from "axios";
 
 export const getProducts = async () => {

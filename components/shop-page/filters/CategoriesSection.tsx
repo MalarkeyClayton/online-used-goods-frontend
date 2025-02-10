@@ -39,7 +39,7 @@ const CategoriesSection = ({ data }: { data: Category[] }) => {
       {data.length > 0 && data.map((category, index) => (
         <Link
           key={index}
-          href={`http:localhost:8080/shop?${category.title}`}
+          href={`${process.env.NEXT_PUBLIC_API_URL}/shop?${category.title}`}
           className="flex items-center justify-between py-2"
         >
           {category.title} <MdKeyboardArrowRight />
