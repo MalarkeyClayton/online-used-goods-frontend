@@ -45,7 +45,7 @@ const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
           className="w-full mb-6 md:mb-9"
         >
           <CarouselContent className="mx-4 xl:mx-0 space-x-4 sm:space-x-5">
-            {data.length > 0 && data.map((product, index) => (
+            { data.length > 0 && data.map((product, index) => (
 
               <CarouselItem
                 key={index}

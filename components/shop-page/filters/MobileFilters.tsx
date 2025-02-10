@@ -9,8 +9,19 @@ import {
 } from "@/components/ui/drawer";
 import { FiSliders } from "react-icons/fi";
 import Filters from ".";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../lib/store';
+import { fetchCategoriesAsync } from "@/lib/features/categories/categoriesSlice";
 
 const MobileFilters = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const categorySelection = useSelector((state: RootState) => state.categories.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategoriesAsync());
+  }, [dispatch]);
   return (
     <>
       <Drawer>
@@ -32,7 +43,7 @@ const MobileFilters = () => {
             <DrawerDescription className="hidden">filters</DrawerDescription>
           </DrawerHeader>
           <div className="max-h-[90%] overflow-y-auto w-full px-5 md:px-6 py-5 space-y-5 md:space-y-6">
-            <Filters />
+            <Filters data={categorySelection}/>
           </div>
         </DrawerContent>
       </Drawer>

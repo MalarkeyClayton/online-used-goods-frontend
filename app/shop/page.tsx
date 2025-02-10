@@ -25,12 +25,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../lib/store';
 import { fetchProductsAsync } from "@/lib/features/products/productsSlice";
+import { fetchCategoriesAsync } from "@/lib/features/categories/categoriesSlice";
 
 export default function ShopPage() {
   const dispatch: AppDispatch = useDispatch();
   const productSelection = useSelector((state: RootState) => state.products.productSelection);
+  const categorySelection = useSelector((state: RootState) => state.categories.categories);
+
   useEffect(() => {
-    dispatch(fetchProductsAsync() );
+    dispatch(fetchProductsAsync());
+    dispatch(fetchCategoriesAsync());
   }, [dispatch]);
 
   return (
@@ -44,7 +48,7 @@ export default function ShopPage() {
               <span className="font-bold text-black text-xl">Filters</span>
               <FiSliders className="text-2xl text-black/40" />
             </div>
-            <Filters />
+            <Filters data={categorySelection} />
           </div>
           <div className="flex flex-col w-full space-y-5">
             <div className="flex flex-col lg:flex-row lg:justify-between">
