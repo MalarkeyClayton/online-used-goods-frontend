@@ -15,7 +15,7 @@ body{
     background: #1f293a;
 }
 
-.container{
+.signupContainer{
     position: relative;
     width: 256px;
     height: 256px;
@@ -24,7 +24,12 @@ body{
     align-items: center;
 }
 
-.container span{
+
+.signup-link-text {
+    color: #fff;
+}
+
+.signupContainer span{
     position: absolute;
     left: 0;
     width: 32px;
@@ -32,7 +37,7 @@ body{
     background: #2c4766;
     border-radius: 8px;
     transform-origin: 128px;
-    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    transform: scale(3.8) rotate(calc(var(--i) * (360deg / 50)));
     animation: animateBlink 3s linear infinite;
     animation-delay: calc(var(--i) * (3s / 50));
 }
@@ -40,14 +45,6 @@ body{
 @keyframes animateBlink{
     0% { background: #0ef;}
     25% { background: #2c4766;}
-}
-
-.signin {
-    display: block;
-}
-
-.signup {
-    display: none;
 }
 
 .login-box{
