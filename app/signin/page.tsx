@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation'; // ✅ Fixed import
+import { useRouter } from 'next/navigation';
 import Itag from './Itag';
 import './sign.css';
 import { useState } from 'react';
@@ -9,7 +9,6 @@ export default function SignIn() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleSign = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -19,7 +18,6 @@ export default function SignIn() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Call the signin API
         try {
             const res = await fetch('/api/signin', {
                 method: 'POST',
@@ -32,7 +30,7 @@ export default function SignIn() {
             const data = await res.json();
 
             if (res.ok) {
-                router.push('/dashboard'); // Redirect to the dashboard or home
+                router.push('/'); // Redirect to the dashboard or home
             } else {
                 console.log(data.error || 'Invalid credentials');
             }
@@ -67,16 +65,6 @@ export default function SignIn() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <label>Password</label>
-                        </div>
-
-                        <div className="input-box">
-                            <input
-                                type="password"
-                                required
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                            />
-                            <label>Confirm Password</label>
                         </div>
 
                         <button className="btn" type="submit">

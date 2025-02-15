@@ -7,12 +7,14 @@ import { useState } from 'react';
 
 export default function SignUp() {
     const router = useRouter();
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [address, setAddress] = useState('');
     const [country, setCountry] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [seller, setSeller] = useState('');
     const [error, setError] = useState('');
 
     const handleSign = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +24,7 @@ export default function SignUp() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password, confirmPassword);
+        console.log({ name, email, password, address, phoneNumber, country, seller }, "--------");
 
         if (password !== confirmPassword) {
             setError('Passwords do not match');
@@ -31,20 +33,19 @@ export default function SignUp() {
             return;
         }
 
-        // Call the signup API
         try {
-            const res = await fetch('/api/signup', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ name, email, password, address, phoneNumber, country, seller }),
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                router.push('/signin'); // Redirect to SignIn page
+                router.push('/signin');
             } else {
                 setError(data.error || 'Something went wrong');
             }
@@ -59,6 +60,16 @@ export default function SignUp() {
                 <div className="login-box">
                     <h2>Sign Up</h2>
                     <form onSubmit={handleSubmit}>
+                        <div className="input-box">
+                            <input
+                                type="text"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <label>Name</label>
+                        </div>
+
                         <div className="input-box">
                             <input
                                 type="email"
@@ -118,6 +129,11 @@ export default function SignUp() {
                             />
                             <label>Phone Number</label>
                         </div>
+
+                        <select id="role" name="role" className='w-full p-1 text-2xl mb-3 rounded-lg' value={seller} onChange={(e) => setSeller(e.target.value)}>
+                            <option value="seller">Seller</option>
+                            <option value="user">user</option>
+                        </select>
 
                         <button className="btn" type="submit">Sign Up</button>
 

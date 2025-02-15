@@ -37,7 +37,7 @@ body{
     background: #2c4766;
     border-radius: 8px;
     transform-origin: 128px;
-    transform: scale(3.8) rotate(calc(var(--i) * (360deg / 50)));
+    transform: scale(4.5) rotate(calc(var(--i) * (360deg / 50)));
     animation: animateBlink 3s linear infinite;
     animation-delay: calc(var(--i) * (3s / 50));
 }
@@ -62,6 +62,11 @@ h2{
     font-size: 2em;
     color: #0ef;
     text-align: center;
+}
+
+.select-box {
+    margin: 25px 0;
+    width: 100%;
 }
 
 .input-box{

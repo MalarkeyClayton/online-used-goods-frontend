@@ -9,6 +9,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../lib/store';
 import { fetchProductsAsync } from "@/lib/features/products/productsSlice";
+import HolyLoader from "holy-loader";
+import TopBanner from "@/components/layout/Banner/TopBanner";
+import Footer from "@/components/layout/Footer";
+import TopNavbar from "@/components/layout/Navbar/TopNavbar";
 
 
 // export const reviewsData: Review[] = [
@@ -58,38 +62,44 @@ import { fetchProductsAsync } from "@/lib/features/products/productsSlice";
 // ];
 
 export default function Home() {
-  const dispatch :AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { productSelection } = useSelector((state: RootState) => state.products);
-  
+
   useEffect(() => {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
 
- 
-return (
-  <>
-    <Header />
-    <Brands />
-    <main className="my-[50px] sm:my-[72px]">
-      <ProductListSec
-        title="NEW ARRIVALS"
-        data={productSelection}
-        viewAllLink="/shop"
-      />
-      <div className="max-w-frame mx-auto px-4 xl:px-0">
-        <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
-      </div>
-      <div className="mb-[50px] sm:mb-20">
-        <ProductListSec
-          title="top selling"
-          data={productSelection}
-          viewAllLink="/shop"
-        />
-      </div>
-      <div className="mb-[50px] sm:mb-20">
-        <DressStyle />
-      </div>
-    </main>
-  </>
-);
+
+  return (
+    <>
+      <HolyLoader color="#868686" />
+      <TopBanner />
+        <TopNavbar />
+        <Header />
+        <Brands />
+        <main className="my-[50px] sm:my-[72px]">
+
+          <ProductListSec
+            title="NEW ARRIVALS"
+            data={productSelection}
+            viewAllLink="/shop"
+          />
+          <div className="max-w-frame mx-auto px-4 xl:px-0">
+            <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
+          </div>
+          <div className="mb-[50px] sm:mb-20">
+            <ProductListSec
+              title="top selling"
+              data={productSelection}
+              viewAllLink="/shop"
+            />
+          </div>
+          <div className="mb-[50px] sm:mb-20">
+            <DressStyle />
+          </div>
+        </main>
+      <Footer />
+
+    </>
+  );
 }

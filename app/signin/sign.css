@@ -24,6 +24,10 @@ body{
     align-items: center;
 }
 
+.signup-link-text {
+    color: #fff;
+}
+
 .signinContainer span{
     position: absolute;
     left: 0;
