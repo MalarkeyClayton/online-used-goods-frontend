@@ -122,10 +122,11 @@ export default function SignUp() {
 
                         <div className="input-box">
                             <input
-                                type="text"
+                                type="tel" // Ensures only phone number input
                                 required
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))} // Removes non-numeric characters
+                                pattern="[0-9]{10,15}" // Accepts numbers between 10 to 15 digits
                             />
                             <label>Phone Number</label>
                         </div>
