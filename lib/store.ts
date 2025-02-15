@@ -4,7 +4,6 @@ import storage from "@/components/storage";
 import productsReducer from "./features/products/productsSlice";
 import categoriesReducer from "./features/categories/categoriesSlice";
 import cartsReducer from "./features/carts/cartsSlice";
-import authReducer from "./features/auth/authSlice";
 
 const persistConfig = {
   key: "root",
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   carts: cartsReducer,
-  auths: authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

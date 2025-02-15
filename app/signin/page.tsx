@@ -1,92 +1,109 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Itag from './Itag';
-import './sign.css';
-import { useState } from 'react';
+import { useState } from "react";
+
+import authApi from '../api/authApi';
+
+import Link from "next/link"; // Importing next/link
 
 export default function SignIn() {
-    const router = useRouter();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState<any>({});
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSign = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        router.push('/signup');
-    };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const validate = () => {
+    const newErrors: any = {};
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    return newErrors;
+  };
 
-        try {
-            const res = await fetch('/api/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                router.push('/'); // Redirect to the dashboard or home
-            } else {
-                console.log(data.error || 'Invalid credentials');
-            }
-        } catch (error) {
-            console.log(error);
-        }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
 
+    try {
+      // POST request with Axios to the sign-in API
+      const res = await authApi.login(formData);
 
+      if (res.message === "Login successful!") {
+        // If successful, redirect to the dashboard or homepage
+        router.push("/"); // Example redirect after successful login
+      }
+    } catch (error: any) {
+      setErrorMessage(error?.response?.data?.message || "Login failed");
+    }
+  };
 
-    return (
-        <>
-            <div className="signinContainer">
-                <div className="login-box">
-                    <h2>Sign In</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="input-box">
-                            <input
-                                type="email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <label>Email</label>
-                        </div>
+  return (
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md w-96"
+      >
+        <h2 className="text-xl font-semibold mb-4">Sign In</h2>
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
-                        <div className="input-box">
-                            <input
-                                type="password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <label>Password</label>
-                        </div>
+        <label className="block mb-2">Email</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full p-2 border rounded-md"
+        />
+        {errors.email && <p className="text-red-500">{errors.email}</p>}
 
-                        <button className="btn" type="submit">
-                            Sign In
-                        </button>
-                        <div className="signup-link">
-                            <p className='signup-link-text'>
-                                Not you have an account?{' '}
-                            </p>
-                            <button onClick={(e) => handleSign(e)} className="btn">
-                                Sign Up
-                            </button>
-                        </div>
+        <label className="block mt-4">Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          className="w-full p-2 border rounded-md"
+        />
+        {errors.password && (
+          <p className="text-red-500">{errors.password}</p>
+        )}
 
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 mt-4 rounded-md"
+        >
+          Sign In
+        </button>
 
-                    </form>
-                </div>
-
-                {[...Array(49)].map((_, index) => (
-                    <Itag key={index} index={index + 1} />
-                ))}
-            </div>
-        </>
-    );
+        <div className="mt-4 text-center">
+          <p>
+            Don't have an account?{" "}
+            <Link href="/signup">
+              Sign Up
+            </Link>
+          </p>
+        </div>
+      </form>
+    </div>
+  );
 }
+
+
+
+
+
