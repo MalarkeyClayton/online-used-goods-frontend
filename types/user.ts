@@ -1,10 +1,10 @@
 export type User = {
-  name: String,
-  email: String,
-  password: String,
-  confirmPassword: String,
-  country: String,
-  address: String,
-  phone: String,
-  seller: Boolean,
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  country: string,
+  address: string,
+  phone: string,
+  seller: boolean,
 };

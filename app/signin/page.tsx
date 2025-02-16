@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import authApi from '../api/authApi';
+import authApi from "../api/authApi";
 
 import Link from "next/link"; // Importing next/link
 
@@ -13,6 +13,7 @@ export default function SignIn() {
     email: "",
     password: "",
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [errors, setErrors] = useState<any>({});
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -25,6 +26,7 @@ export default function SignIn() {
   };
 
   const validate = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newErrors: any = {};
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.password) newErrors.password = "Password is required";
@@ -47,6 +49,7 @@ export default function SignIn() {
         // If successful, redirect to the dashboard or homepage
         router.push("/"); // Example redirect after successful login
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setErrorMessage(error?.response?.data?.message || "Login failed");
     }
@@ -79,9 +82,7 @@ export default function SignIn() {
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
-        {errors.password && (
-          <p className="text-red-500">{errors.password}</p>
-        )}
+        {errors.password && <p className="text-red-500">{errors.password}</p>}
 
         <button
           type="submit"
@@ -92,18 +93,10 @@ export default function SignIn() {
 
         <div className="mt-4 text-center">
           <p>
-            Don't have an account?{" "}
-            <Link href="/signup">
-              Sign Up
-            </Link>
+            {`Don't have an account?`} <Link href="/signup">Sign Up</Link>
           </p>
         </div>
       </form>
     </div>
   );
 }
-
-
-
-
-

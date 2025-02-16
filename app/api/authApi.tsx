@@ -7,7 +7,7 @@ const authApi = {
         const response = await axios.post(`${baseUrl}/api/auth/signup`, todo);
         return response.data;
     },
-    login: async (todo: {email: String; password:String }) => {
+    login: async (todo: {email: string; password:string }) => {
         const response = await axios.post(`${baseUrl}/api/auth/signin`, todo);
         return response.data;
     },
